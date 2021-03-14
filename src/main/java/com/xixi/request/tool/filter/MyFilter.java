@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * @author shengchengchao
@@ -22,7 +23,7 @@ import java.io.IOException;
  * @createTime 2021/3/12
  */
 @Slf4j
-@WebFilter("/test/*")
+@WebFilter("/t")
 public class MyFilter implements Filter {
 
     @Autowired
@@ -33,9 +34,11 @@ public class MyFilter implements Filter {
         log.info("进入过滤器");
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         CustomHttpServletRequestWrapper requestWrapper = new CustomHttpServletRequestWrapper(httpRequest) ;
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("password","111");
-        System.out.println(AESUtil.encrypt(JSON.toJSONString(jsonObject).getBytes(), cipherProperties.getKey().getBytes()));
+        //从 Requestparamter中获得参数
+        Map<String, String[]> parameterMap = servletRequest.getParameterMap();
+        //得到 @PathVariable 的参数
+        //Map pathVariables = (Map) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+        // String Id = (String)pathVariables.get("Id");
         String body = requestWrapper.getBody();
         byte[] decrypt = AESUtil.decrypt(body.getBytes(), cipherProperties.getKey().getBytes());
         requestWrapper.setBody(new String(decrypt));

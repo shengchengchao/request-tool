@@ -27,7 +27,16 @@ public class TestController {
     @PostMapping("/encrypt")
     @ResponseBody
     @Cipher(requestDecrypt = true,responsEncrypt = true)
-    public BaseResult<String> testData(@RequestBody Testdto testdto) {
+    public BaseResult testData(@RequestParam Testdto testdto) {
+        log.info("password" + testdto.getPassword());
+        return new BaseResult<>(200,"成功",testdto.getPassword());
+    }
+
+    @ApiOperation(value = "测试加解密2")
+    @PostMapping("/Decrypt")
+    @ResponseBody
+    @Cipher(requestDecrypt = true,responsEncrypt = true)
+    public BaseResult testData2(@RequestBody Testdto testdto) {
         log.info("password" + testdto.getPassword());
         return new BaseResult<>(200,"成功",testdto.getPassword());
     }
