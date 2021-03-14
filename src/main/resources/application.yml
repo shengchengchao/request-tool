@@ -5,7 +5,10 @@ server:
 
 swagger:
   enable: true
-  
 
+request:
+  tool:
+    cipher:
+      key: xixi.Code.Github
 
 

@@ -1,17 +1,9 @@
 package com.xixi.request.tool.config;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * @author shengchengchao
@@ -23,14 +15,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 
 
-    /**
-     * 添加拦截器
-     * @param registry
-     */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
 
-    }
 
     /**
      * 防止@EnableMvc把默认的静态资源路径覆盖了，手动设置的方式
@@ -45,6 +30,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         // 解决swagger的js文件无法访问
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
+
 
 
 }
