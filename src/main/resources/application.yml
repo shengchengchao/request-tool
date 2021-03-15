@@ -1,0 +1,14 @@
+server:
+  port: 8888
+  max-http-header-size: 1048576
+
+
+swagger:
+  enable: true
+
+request:
+  tool:
+    cipher:
+      key: xixi.Code.Github
+
+
