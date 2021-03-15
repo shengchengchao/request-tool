@@ -1,5 +1,7 @@
 package com.xixi.request.tool.config;
 
+import com.xixi.request.tool.Interceptor.RequestInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -14,8 +16,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
 
-
-
+    @Autowired
+    private RequestInterceptor requestInterceptor;
+    /**
+     * 添加拦截器
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+//        RequestInterceptor handlerIntercept = new RequestInterceptor();
+        registry.addInterceptor(requestInterceptor);
+    }
 
     /**
      * 防止@EnableMvc把默认的静态资源路径覆盖了，手动设置的方式

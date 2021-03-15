@@ -6,8 +6,6 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author shengchengchao
@@ -17,8 +15,6 @@ import java.util.Map;
 public class CustomHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
 
-    private final Map<String, String> customHeaders;
-
     public static final String JSON_TYPE = "application/json";
     // 保存request body的数据
     private String body;
@@ -26,7 +22,6 @@ public class CustomHttpServletRequestWrapper extends HttpServletRequestWrapper {
     // 解析request的inputStream(即body)数据，转成字符串
     public CustomHttpServletRequestWrapper(HttpServletRequest request) {
         super(request);
-        this.customHeaders = new HashMap<>();
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferedReader = null;
         InputStream inputStream = null;
@@ -71,21 +66,6 @@ public class CustomHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     }
 
-    public void putHeader(String name, String value){
-        this.customHeaders.put(name, value);
-    }
-
-    @Override
-    public String getHeader(String name) {
-        // check the custom headers first
-        String headerValue = customHeaders.get(name);
-
-        if (headerValue != null){
-            return headerValue;
-        }
-        // else return from into the original wrapped object
-        return ((HttpServletRequest) getRequest()).getHeader(name);
-    }
 
 
     @Override
