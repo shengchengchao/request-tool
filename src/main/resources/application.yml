@@ -6,9 +6,6 @@ server:
 swagger:
   enable: true
 
-request:
-  tool:
-    cipher:
-      key: xixi.Code.Github
-
-
+spring:
+  redis:
+    password: masterpassword
